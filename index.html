@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#941c20">
+
+    <title>JLSPT | JL Streaming Project Team</title>
+    <meta name="description" content="Explore music, official videos, streaming campaigns, guides, and community updates in one streaming portal.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* PAGE WIDTH SAFETY */
+        html {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            overflow-x: clip;
+	    background:
+              radial-gradient(ellipse at 50% 0%, rgba(148, 28, 32, 0.16), transparent 52%),
+              #171416;
+        }
+
+        body {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: clip;
+        }
+
+        body,
+        header,
+        main,
+        footer,
+        section,
+        .container,
+        .nav-inner {
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        main,
+        .site-header,
+        .site-footer {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* OFFICIAL LOGO */
+        .site-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .site-logo-image {
+            display: block;
+            width: 52px;
+            height: 52px;
+            flex: 0 0 52px;
+            object-fit: contain;
+            border: none !important;
+            outline: none;
+            box-shadow: none !important;
+            background: transparent;
+        }
+
+        /* COMPACT HOME HERO */
+        .hero {
+            padding-block: clamp(38px, 5vw, 64px);
+        }
+
+        .hero-content {
+            max-width: 760px;
+        }
+
+        .hero h1 {
+            margin-bottom: 12px;
+            line-height: 1.12;
+            text-wrap: balance;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            margin-bottom: 0;
+        }
+
+        .hero-actions {
+            margin-top: 22px;
+        }
+
+        /* BALANCED SECTION SPACING */
+        .section {
+            padding-block: 36px;
+        }
+
+        .section-tight {
+            padding-block: 22px;
+        }
+
+        .section + .section {
+            padding-top: 12px;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .live-card {
+            padding: 20px 24px;
+        }
+
+        /* FEATURED CAMPAIGN */
+        .home-featured-campaign {
+            display: block;
+            padding: clamp(20px, 3vw, 30px);
+        }
+
+        .home-campaign-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .home-campaign-body h3 {
+            margin: 0 0 10px;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
+        }
+
+        .home-campaign-body p {
+            max-width: 620px;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .home-campaign-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 248, 240, 0.12);
+            color: var(--gold, #f5b51b);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .home-campaign-link span:last-child {
+            font-size: 1.3rem;
+            transition: transform 180ms ease;
+        }
+
+        .home-campaign-link:hover span:last-child {
+            transform: translateX(4px);
+        }
+
+        .home-campaign-link:focus-visible {
+            outline: 2px solid var(--gold, #f5b51b);
+            outline-offset: 5px;
+            border-radius: 4px;
+        }
+
+        /* DISCOVERY CARDS */
+        .next-card {
+            min-width: 0;
+            gap: 14px;
+        }
+
+        .next-card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 42px;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: rgba(245, 181, 27, 0.10);
+            color: var(--gold, #f5b51b);
+            font-size: 1.35rem;
+        }
+
+        .next-card strong {
+            flex: 1;
+            min-width: 0;
+            line-height: 1.4;
+        }
+
+        .next-card-arrow {
+            color: var(--gold, #f5b51b);
+            font-size: 1.1rem;
+        }
+
+        /* RED CORNER */
+        .red-feature-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .red-feature-content {
+            max-width: 760px;
+        }
+
+        .official-badge {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        .card-actions {
+            margin-top: 20px;
+        }
+
+        .btn-light {
+            background: var(--text, #fff8f0);
+            color: var(--red-deep, #641419);
+            border: 1px solid rgba(255, 248, 240, 0.5);
+        }
+
+        .btn-light:hover {
+            background: #ffffff;
+            color: var(--red, #941c20);
+        }
+
+        /* QUICK ACCESS */
+        .quick-card {
+            min-width: 0;
+        }
+
+        .quick-card > div {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .quick-card strong,
+        .quick-card span {
+            overflow-wrap: anywhere;
+        }
+
+        /* KEYBOARD ACCESSIBILITY */
+        .site-logo:focus-visible,
+        .social-links a:focus-visible,
+        .next-card:focus-visible,
+        .quick-card:focus-visible {
+            outline: 2px solid var(--gold, #f5b51b);
+            outline-offset: 4px;
+        }
+
+        /* TABLET */
+        @media (max-width: 900px) {
+            .hero {
+                padding-block: 42px;
+            }
+
+            .section {
+                padding-block: 30px;
+            }
+
+            .section-tight {
+                padding-block: 18px;
+            }
+
+            .section + .section {
+                padding-top: 10px;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 620px) {
+            .site-logo-image {
+                width: 44px;
+                height: 44px;
+                flex-basis: 44px;
+            }
+
+            .hero {
+                padding-block: 36px 40px;
+            }
+
+            .hero h1 {
+                max-width: 560px;
+            }
+
+            .hero-actions {
+                margin-top: 18px;
+                gap: 10px;
+            }
+
+            .section {
+                padding-block: 26px;
+            }
+
+            .section-tight {
+                padding-block: 15px;
+            }
+
+            .section + .section {
+                padding-top: 8px;
+            }
+
+            .section-heading {
+                margin-bottom: 16px;
+                gap: 12px;
+            }
+
+            .live-card {
+                padding: 18px;
+                gap: 16px;
+            }
+
+            .home-featured-campaign {
+                padding: 20px;
+            }
+
+            .home-campaign-topline {
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+
+            .home-campaign-link {
+                margin-top: 17px;
+            }
+
+            .next-grid,
+            .quick-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .next-card,
+            .quick-card {
+                padding: 15px;
+            }
+
+            .card-actions {
+                margin-top: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .home-campaign-link span:last-child {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="nav-inner">
+
+            <a href="index.html" class="site-logo" aria-label="JLSPT Home">
+                <img
+                    src="assets/JLSPT-logo.png"
+                    alt="JLSPT Logo"
+                    class="site-logo-image"
+                    width="52"
+                    height="52"
+                >
+
+                <span class="logo-text">
+                    <strong>JLSPT</strong>
+                    <small>JL Streaming Project Team</small>
+                </span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation"></nav>
+
+            <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <p class="eyebrow">THE OFFICIAL STREAMING PORTAL</p>
+
+                    <h1>Stream with purpose.</h1>
+
+                    <p class="hero-description">
+                        Music, official videos, streaming missions, and helpful resources, all in one place.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="music-video.html" class="btn btn-primary">
+                            Explore Music &amp; Video
+                        </a>
+
+                        <a href="guides.html" class="btn btn-secondary">
+                            Streaming Guides
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- STATIONHEAD -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">LIVE NOW</p>
+                        <h2>Stationhead</h2>
+                    </div>
+                </div>
+
+                <div class="live-card">
+                    <div class="live-card-content">
+
+                        <div class="live-status">
+                            <span class="live-dot" aria-hidden="true"></span>
+                            <span>ON AIR <span aria-hidden="true">·</span> 24/7</span>
+                        </div>
+
+                        <p>Tune in and stream along with the community.</p>
+
+                    </div>
+
+                    <a
+                        href="https://app.stationhead.com/jlspteam"
+                        class="btn btn-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Open Station
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FEATURED CAMPAIGN -->
+        <section class="section section-tight">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">CURRENT MISSION</p>
+                        <h2>Featured Campaign</h2>
+                    </div>
+
+                    <a href="campaigns.html" class="text-link">
+                        All Campaigns <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <article class="campaign-card home-featured-campaign">
+
+                    <div class="home-campaign-topline">
+                        <span class="status-badge status-active">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            ACTIVE
+                        </span>
+
+                        <span class="card-label">YOUTUBE STREAMING</span>
+                    </div>
+
+                    <div class="home-campaign-body">
+
+                        <h3>MISSION: STREAM ALON</h3>
+
+                        <p>
+                            Help bring the official music video closer to its next milestone.
+                        </p>
+
+                        <a href="campaigns.html" class="home-campaign-link">
+                            <span>Explore Campaign Details</span>
+                            <span aria-hidden="true">→</span>
+                        </a>
+
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- DISCOVER -->
+        <section class="section section-tight">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">DISCOVER</p>
+                        <h2>What's Next</h2>
+                    </div>
+                </div>
+
+                <div class="next-grid">
+
+                    <a href="music-video.html" class="next-card">
+                        <span class="next-card-icon" aria-hidden="true">♪</span>
+                        <strong>New Releases</strong>
+                        <span class="next-card-arrow" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a href="music-video.html" class="next-card">
+                        <span class="next-card-icon" aria-hidden="true">★</span>
+                        <strong>Release Anniversaries</strong>
+                        <span class="next-card-arrow" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a href="campaigns.html" class="next-card">
+                        <span class="next-card-icon" aria-hidden="true">✦</span>
+                        <strong>Special Activities</strong>
+                        <span class="next-card-arrow" aria-hidden="true">↗</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- RED CORNER -->
+        <section class="section section-tight">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">RED CORNER</p>
+                        <h2>From the Team</h2>
+                    </div>
+
+                    <a href="corner.html" class="text-link">
+                        View All <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <article class="red-feature-card">
+                    <div class="red-feature-content">
+
+                        <span class="official-badge">OFFICIAL UPDATE</span>
+
+                        <h3>News, Notices &amp; Announcements</h3>
+
+                        <p>
+                            Find important streaming updates, campaign announcements, release reminders, and milestones.
+                        </p>
+
+                        <div class="card-actions">
+                            <a href="corner.html" class="btn btn-light">
+                                Explore RED CORNER
+                            </a>
+                        </div>
+
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- QUICK ACCESS -->
+        <section class="section section-tight">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">QUICK ACCESS</p>
+                        <h2>Explore the Portal</h2>
+                    </div>
+                </div>
+
+                <div class="quick-grid">
+
+                    <a href="music-video.html" class="quick-card">
+                        <span class="quick-card-icon" aria-hidden="true">♪</span>
+
+                        <div>
+                            <strong>Music &amp; Video</strong>
+                            <span>Releases and official content</span>
+                        </div>
+
+                        <span class="quick-card-arrow" aria-hidden="true">→</span>
+                    </a>
+
+                    <a href="campaigns.html" class="quick-card">
+                        <span class="quick-card-icon" aria-hidden="true">◉</span>
+
+                        <div>
+                            <strong>Campaigns</strong>
+                            <span>Streaming missions and goals</span>
+                        </div>
+
+                        <span class="quick-card-arrow" aria-hidden="true">→</span>
+                    </a>
+
+                    <a href="guides.html" class="quick-card">
+                        <span class="quick-card-icon" aria-hidden="true">?</span>
+
+                        <div>
+                            <strong>Guides</strong>
+                            <span>Streaming tips and help</span>
+                        </div>
+
+                        <span class="quick-card-arrow" aria-hidden="true">→</span>
+                    </a>
+
+                    <a href="my-profile.html" class="quick-card">
+                        <span class="quick-card-icon" aria-hidden="true">☆</span>
+
+                        <div>
+                            <strong>My Profile</strong>
+                            <span>Your personal activity</span>
+                        </div>
+
+                        <span class="quick-card-arrow" aria-hidden="true">→</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <p class="footer-message">
+                    For JL, with love from Starflares. ❤️
+                </p>
+
+                <div class="social-links" aria-label="JLSPT social media">
+
+                    <a href="https://x.com/JLSPTeam" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
+
+                    <a href="https://facebook.com/JLSPTeam1" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+
+                    <a href="https://instagram.com/JLSPTeam1" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+
+                    <a href="https://tiktok.com/@JLSPTeam" target="_blank" rel="noopener noreferrer" aria-label="TikTok">♪</a>
+
+                    <a href="https://youtube.com/@JLSPTeam" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶</a>
+
+                    <a href="https://stationhead.com/JLSPTeam" target="_blank" rel="noopener noreferrer" aria-label="Stationhead">♫</a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="menu.js"></script>
+
+</body>
+</html>
